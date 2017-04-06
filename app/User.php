@@ -15,7 +15,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'email',
+        'password',
+        'first_name',
+        'last_name',
+        'date_of_birth'
     ];
 
     /**
@@ -24,6 +28,23 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
+
+    /**
+     * Return simplified user full name. (Using in templates)
+     * example:
+     *      first_name = 'John'
+     *      last_name = 'Smith'
+     * return
+     *      full_name = 'John S.'
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        $first_name = $this->attributes['first_name'];
+        $last_name = $this->attributes['last_name'];
+        return $first_name . ' ' . strtoupper(mb_substr($last_name, 0, 1)) . '.';
+    }
 }

@@ -12,5 +12,22 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+//    return view('layouts.app');
+    return view('main');
+});
+
+Auth::routes();
+
+//Route::get('/home', 'HomeController@index');
+
+Route::resource('contacts', 'ContactsController', [
+    'only' => ['index']
+]);
+
+Route::group(['middleware' => ['web', 'guest']], function () {
+
+});
+
+Route::group(['middleware' => ['web', 'auth']], function () {
+    Route::resource('settings', 'SettingsController');
 });

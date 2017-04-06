@@ -25,7 +25,14 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '';
+
+    public function username()
+    {
+        return 'email';
+//TODO: implement auth by login and email
+//        return 'login';
+    }
 
     /**
      * Create a new controller instance.
