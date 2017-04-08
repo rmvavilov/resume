@@ -33,4 +33,6 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::resource('settings', 'SettingsController');
     Route::get('users', 'UsersController@index')->name('users.index');
     Route::post('users/{id}', 'UsersController@update')->name('users.update');
+    
+    Route::post('delete', 'UsersController@deleteAccount')->name('delete');
 });

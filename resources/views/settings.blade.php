@@ -22,7 +22,8 @@
                                             <h3 class="profile-username text-center">
                                                 {{Auth::user()->first_name}} {{Auth::user()->last_name}}
                                             </h3>
-                                            <a href="#" class="btn btn-primary btn-block" disabled><b>Change image</b></a>
+                                            <a href="#" class="btn btn-primary btn-block" disabled><b>Change
+                                                    image</b></a>
                                         </div>
                                     </div>
                                 </div>
@@ -135,7 +136,64 @@
                                                     возврат будет невозможен. Пожалуйста, будьте внимательны.
                                                 </strong>
                                             </p>
-                                            <a href="#" class="btn btn-danger" disabled>Удалить аккаунт</a>
+                                            {{--<a href="#" class="btn btn-danger" disabled>Удалить аккаунт</a>--}}
+
+                                            {{-- Modal dialog for account delete --}}
+                                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                    {{--data-target=".bs-example-modal-sm">Small modal--}}
+                                                    data-target="#data-delete">Удалить аккаунт
+                                            </button>
+
+                                            <div id="data-delete" class="modal fade" tabindex="-1" role="dialog"
+                                                 aria-labelledby="mySmallModalLabel">
+                                                <div class="modal-dialog modal-sm" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close"><span
+                                                                        aria-hidden="true">&times;</span></button>
+                                                            <h4 class="modal-title">Удаление аккаунта</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form id="delete-form" class="form-horizontal" role="form"
+                                                                  method="POST"
+                                                                  action="{{ route('delete') }}">
+                                                                {{ csrf_field() }}
+                                                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                                                    <label for="password"
+                                                                           class="col-md-4 control-label">Пароль</label>
+
+                                                                    <div class="col-md-6">
+                                                                        <input id="password" type="password"
+                                                                               class="form-control" min="6" max="16"
+                                                                               name="password"
+                                                                               required
+                                                                        >
+
+                                                                        @if ($errors->has('password'))
+                                                                            <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <div class="form-group">
+                                                                <div class="btn-group" role="group" aria-label="...">
+                                                                    <button type="submit" form="delete-form"
+                                                                            class="btn btn-danger">Подтвердить
+                                                                    </button>
+                                                                    <button type="button" data-dismiss="modal"
+                                                                            class="btn btn-default">Отмена
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
