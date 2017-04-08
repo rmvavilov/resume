@@ -11,7 +11,8 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Styles -->
-        <link href="../../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
         <!-- Scripts -->
@@ -22,8 +23,9 @@
         </script>
     </head>
     <body>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            {{--<div class="container-fluid">--}}
+            <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -45,7 +47,8 @@
                         <li @if(Request::path() == 'contacts') class="active" @endif><a href="/contacts">Контакты</a>
                         </li>
                         @unless (Auth::guest())
-                            <li @if(Request::path() == 'settings') class="active" @endif><a href="/settings">Личный кабинет</a></li>
+                            <li @if(Request::path() == 'settings') class="active" @endif><a href="/settings">Личный
+                                    кабинет</a></li>
                         @endunless
                     </ul>
 
@@ -57,14 +60,15 @@
                         </p>
                     @else
                         <p class="navbar-text navbar-right">
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <img class="small-profile-user-img  img-circle" src="/img/default.gif"
+                                 alt="Small user profile picture">
                             {{Auth::user()->full_name}}
                             <a href="{{ route('logout') }}"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 Выйти
                             </a>
                         </p>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
                             {{ csrf_field() }}
                         </form>
                     @endif
@@ -72,9 +76,15 @@
             </div>
         </nav>
 
-        <div id="app">
-            @yield('content')
-        </div>
+        @yield('content')
+
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted text-center">
+                    <strong>Copyright © 2016-2017 <a href="https://github.com/rmvavilov">Roman Vavilov</a>.</strong>
+                </p>
+            </div>
+        </footer>
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>

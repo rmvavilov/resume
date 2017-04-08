@@ -19,6 +19,7 @@ class User extends Authenticatable
         'password',
         'first_name',
         'last_name',
+        'phone',
         'date_of_birth'
     ];
 
@@ -46,5 +47,11 @@ class User extends Authenticatable
         $first_name = $this->attributes['first_name'];
         $last_name = $this->attributes['last_name'];
         return $first_name . ' ' . strtoupper(mb_substr($last_name, 0, 1)) . '.';
+    }
+
+    public function getPhoneAttribute($value)
+    {
+        $formatted_phone = substr_replace($value, '-', 3, 0);
+        return $formatted_phone;
     }
 }

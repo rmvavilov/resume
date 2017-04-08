@@ -1,0 +1,25 @@
+body {
+    padding-top: 70px;
+}
+
+#logout-form {
+    display: none;
+}
+
+.profile-user-img {
+    width: 120px;
+}
+
+.small-profile-user-img {
+    width: 20px;
+    display: inline;
+}
+
+footer {
+    position: fixed;
+    height: 25px;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #d3e0e9;
+}

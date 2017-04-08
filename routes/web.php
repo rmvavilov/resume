@@ -24,10 +24,13 @@ Route::resource('contacts', 'ContactsController', [
     'only' => ['index']
 ]);
 
-Route::group(['middleware' => ['web', 'guest']], function () {
 
+Route::group(['middleware' => ['web', 'guest']], function () {
+//    Route::resource('settings', 'SettingsController');
 });
 
 Route::group(['middleware' => ['web', 'auth']], function () {
     Route::resource('settings', 'SettingsController');
+    Route::get('users', 'UsersController@index')->name('users.index');
+    Route::post('users/{id}', 'UsersController@update')->name('users.update');
 });
