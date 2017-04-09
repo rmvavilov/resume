@@ -11,6 +11,5 @@ Homestead.yaml
 .env
 
 # temp hide main files with personal data
-/resources/views/_contacts.blade.php
 /resources/views/_main.blade.php
 /public/img/_resume-photo.jpg

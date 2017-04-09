@@ -10,10 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\ResumeContact;
 
 Route::get('/', function () {
-//    return view('layouts.app');
-    return view('main');
+    $contacts = ResumeContact::orderBy('type', 'asc')->where('main', 1)->get();
+    return view('main', array('contacts' => $contacts));
 });
 
 Auth::routes();

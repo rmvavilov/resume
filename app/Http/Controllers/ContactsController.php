@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\ResumeContact;
 
 class ContactsController extends Controller
 {
@@ -13,7 +14,8 @@ class ContactsController extends Controller
      */
     public function index()
     {
-        return view('contacts');
+        $contacts = ResumeContact::orderBy('type', 'asc')->get();
+        return view('contacts', array('contacts' => $contacts));
     }
 
     /**

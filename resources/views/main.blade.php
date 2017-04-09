@@ -15,18 +15,17 @@
                                                  src="/img/resume-photo.jpg" alt="User profile picture">
                                             <h3 class="profile-username text-center">John Smith</h3>
                                             <p class="text-muted text-center">Web Software Developer</p>
+                                            
                                             <ul class="list-group list-group-unbordered">
-                                                <li class="list-group-item">
-                                                    <i class="fa fa-envelope"></i>&nbsp;
-                                                    <a href="mailto: john.smith@website.com">john.smith@website.com</a>
-                                                </li>
-                                                <li class="list-group-item">
-                                                    <i class="fa fa-phone"></i>&nbsp;
-                                                    <a href="tel:+38(066) 123 4567">+38(066) 123 4567</a>
-                                                </li>
+                                                
+                                                @foreach ($contacts as $contact)
+                                                    <li class="list-group-item"><i class="fa {{ $contact->icon_class }}"></i>&nbsp;
+                                                        <a href="{{ $contact->href }}">{{ $contact->short_href }}</a>
+                                                    </li>
+                                                @endforeach
+                                                
                                             </ul>
-                                            <a href="/contacts" class="btn btn-primary btn-block"><b>See all
-                                                    contacts</b></a>
+                                            <a href="/contacts" class="btn btn-primary btn-block"><b>Посмотреть все контакты</b></a>
                                         </div>
                                     </div>
                                 </div>
