@@ -29,9 +29,7 @@ class LoginController extends Controller
 
     public function username()
     {
-        return 'email';
-//TODO: implement auth by login and email
-//        return 'login';
+        return 'login';
     }
 
     /**

@@ -21,7 +21,6 @@
                                                 {{Auth::user()->first_name}} {{Auth::user()->last_name}}
                                             </h3>
                                             <form class="form-horizontal" role="form" method="POST"
-                                                  {{--                                                  action="{{ route('users.update', Auth::user()->id), true }}"--}}
                                                   action="{{ route('users.image.update')}}"
                                                   enctype="multipart/form-data">
                                                 {{ csrf_field() }}
@@ -43,8 +42,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-
                                             </form>
                                             <hr>
                                         </div>
@@ -122,6 +119,21 @@
                                                         @if ($errors->has('phone'))
                                                             <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group{{ $errors->has('login') ? ' has-error' : '' }}">
+                                                    <label for="login" class="col-md-4 control-label">Логин</label>
+
+                                                    <div class="col-md-6">
+                                                        <input id="login" type="login" class="form-control" name="login"
+                                                               value="{{ old('login', Auth::user()->login) }}" disabled>
+
+                                                        @if ($errors->has('login'))
+                                                            <span class="help-block">
+                                        <strong>{{ $errors->first('login') }}</strong>
                                     </span>
                                                         @endif
                                                     </div>

@@ -12,6 +12,7 @@ class User extends Authenticatable
     use Notifiable;
 
     const DEFAULT_USER_IMAGE = 'default.jpg';
+    const PHONE_DELIMITER = '-';
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'login',
         'email',
         'password',
         'first_name',
@@ -54,9 +56,17 @@ class User extends Authenticatable
         return $first_name . ' ' . strtoupper(mb_substr($last_name, 0, 1)) . '.';
     }
 
+    public function setPhoneAttribute($value)
+    {
+        if (strpos($value, self::PHONE_DELIMITER)) {
+            $phone = str_replace(self::PHONE_DELIMITER, '', $value);
+            $this->attributes['phone'] = $phone;
+        }
+    }
+
     public function getPhoneAttribute($value)
     {
-        $formatted_phone = substr_replace($value, '-', 3, 0);
+        $formatted_phone = substr_replace($value, self::PHONE_DELIMITER, 3, 0);
         return $formatted_phone;
     }
 
@@ -69,6 +79,7 @@ class User extends Authenticatable
             File::delete(public_path('/img/avatar/') . $avatar_file_name);
         }
         $user->avatar = User::DEFAULT_USER_IMAGE;
+
         $user->save();
     }
 }

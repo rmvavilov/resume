@@ -53,6 +53,7 @@ class RegisterController extends Controller
             'first_name' => 'required|max:255',
             'phone' => 'required|regex:/[0-9]{3}(-)[0-9]{7}/',
             'date_of_birth' => 'required|date',
+            'login' => 'required|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|max:16|confirmed',
         ]);
@@ -69,8 +70,9 @@ class RegisterController extends Controller
         $user = User::create([
             'last_name' => $data['last_name'],
             'first_name' => $data['first_name'],
-            'phone' => str_replace('-', '', $data['phone']),
+            'phone' => $data['phone'],
             'date_of_birth' => $data['date_of_birth'],
+            'login' => $data['login'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);

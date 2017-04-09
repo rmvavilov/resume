@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
+use App\Http\Requests\UsersRequest;
 
 class UsersController extends Controller
 {
@@ -70,8 +71,18 @@ class UsersController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsersRequest $request, $id)
     {
+        $user = Auth::user();
+
+        $user->last_name = $request->input('last_name');
+        $user->first_name = $request->input('first_name');
+        $user->date_of_birth = $request->input('date_of_birth');
+        $user->phone = str_replace('-', '', $request->input('phone'));
+
+        $user->save();
+
+        return redirect()->back();
     }
 
     public function deleteImage(Request $request)
