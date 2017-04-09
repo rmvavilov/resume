@@ -34,5 +34,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::get('users', 'UsersController@index')->name('users.index');
     Route::post('users/{id}', 'UsersController@update')->name('users.update');
     
+    Route::post('users/image/update', 'UsersController@updateImage')->name('users.image.update');
+    Route::get('users/image/delete', 'UsersController@deleteImage')->name('users.image.delete');
+    
     Route::post('delete', 'UsersController@deleteAccount')->name('delete');
 });

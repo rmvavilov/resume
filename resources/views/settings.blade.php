@@ -14,16 +14,39 @@
                                 <div class="col-lg-4 col-md-4">
                                     <div class="box box-primary">
                                         <div class="box-body box-profile">
-                                            {{--<img class="profile-user-img img-responsive center-block img-circle"--}}
-                                            {{--src="/img/resume-photo.jpg" alt="User profile picture">--}}
                                             <img class="profile-user-img img-responsive center-block img-circle"
-                                                 src="/img/default.gif"
+                                                 src="/img/avatar/{{ Auth::user()->avatar }}"
                                                  alt="Small user profile picture">
                                             <h3 class="profile-username text-center">
                                                 {{Auth::user()->first_name}} {{Auth::user()->last_name}}
                                             </h3>
-                                            <a href="#" class="btn btn-primary btn-block" disabled><b>Change
-                                                    image</b></a>
+                                            <form class="form-horizontal" role="form" method="POST"
+                                                  {{--                                                  action="{{ route('users.update', Auth::user()->id), true }}"--}}
+                                                  action="{{ route('users.image.update')}}"
+                                                  enctype="multipart/form-data">
+                                                {{ csrf_field() }}
+
+                                                <div class="form-group">
+                                                    <div class="col-md-9">
+                                                        <input id="avatar" type="file" class="" name="avatar" required>
+                                                        <input type="hidden" name="img" value="false">
+                                                        <br>
+
+                                                        <div class="btn-group" role="group" aria-label="...">
+                                                            <button type="submit" class="btn btn-primary">Загрузить
+                                                                фото
+                                                            </button>
+                                                            <a href="{{ route('users.image.delete')}}"
+                                                               class="btn btn-danger" title="Удалить фото">
+                                                                <i class="fa fa-close"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </form>
+                                            <hr>
                                         </div>
                                     </div>
                                 </div>
@@ -120,8 +143,9 @@
                                                 </div>
 
                                                 <div class="form-group">
+                                                    <input type="hidden" name="img" value="true">
                                                     <div class="col-md-6 col-md-offset-4">
-                                                        <button type="submit" class="btn btn-primary" disabled>
+                                                        <button type="submit" class="btn btn-primary">
                                                             Сохранить
                                                         </button>
                                                         <button type="reset" class="btn btn-default">

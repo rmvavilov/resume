@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 
 class UsersController extends Controller
 {
@@ -72,12 +74,47 @@ class UsersController extends Controller
     {
     }
 
+    public function deleteImage(Request $request)
+    {
+        User::deleteUserAvatar();
+
+        return redirect()->back();
+    }
+
+    public function updateImage(Request $request)
+    {
+        if ($request->has('img')) {
+            if ($request->input('img') === 'true') {
+                // change settings
+            } else {
+                // change image
+                if ($request->hasFile('avatar')) {
+                    $user = Auth::user();
+                    $avatar_file = $request->file('avatar');
+                    $avatar_file_name = 'u_' . $user->id . '_avatar.' . $avatar_file->getClientOriginalExtension();
+                    $old_avatar_file_name = $user->avatar;
+                    // delete old file
+                    if ($old_avatar_file_name != User::DEFAULT_USER_IMAGE) {
+                        File::delete(public_path('/img/avatar/') . $old_avatar_file_name);
+                    }
+                    // crete new file
+                    Image::make($avatar_file)->resize(250, 250)->save(public_path('/img/avatar/') . $avatar_file_name);
+                    $user->avatar = $avatar_file_name;
+                    $user->save();
+                }
+            }
+        }
+
+        return redirect()->back();
+    }
+
     public function deleteAccount(Request $request)
     {
         $password = $request->input('password');
-        if( $password ){
+        if ($password) {
             if (Hash::check($password, Auth::user()->getAuthPassword())) {
                 $user = User::find(Auth::user()->id);
+                User::deleteUserAvatar();
                 Auth::logout();
                 if ($user->delete()) {
                     // TODO:
@@ -89,7 +126,7 @@ class UsersController extends Controller
             } else {
                 return redirect()->back();
             }
-        }else{
+        } else {
             return redirect()->back();
         }
     }

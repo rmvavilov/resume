@@ -4,10 +4,14 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class User extends Authenticatable
 {
     use Notifiable;
+
+    const DEFAULT_USER_IMAGE = 'default.jpg';
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +23,7 @@ class User extends Authenticatable
         'password',
         'first_name',
         'last_name',
+        'avatar',
         'phone',
         'date_of_birth'
     ];
@@ -53,5 +58,17 @@ class User extends Authenticatable
     {
         $formatted_phone = substr_replace($value, '-', 3, 0);
         return $formatted_phone;
+    }
+
+    public static function deleteUserAvatar()
+    {
+        $user = Auth::user();
+        $avatar_file_name = $user->avatar;
+
+        if ($avatar_file_name != self::DEFAULT_USER_IMAGE) {
+            File::delete(public_path('/img/avatar/') . $avatar_file_name);
+        }
+        $user->avatar = User::DEFAULT_USER_IMAGE;
+        $user->save();
     }
 }

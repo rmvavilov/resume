@@ -60,7 +60,8 @@
                         </p>
                     @else
                         <p class="navbar-text navbar-right">
-                            <img class="small-profile-user-img  img-circle" src="/img/default.gif"
+                            <img class="small-profile-user-img  img-circle"
+                                 src="/img/avatar/{{ Auth::user()->avatar }}"
                                  alt="Small user profile picture">
                             {{Auth::user()->full_name}}
                             <a href="{{ route('logout') }}"
