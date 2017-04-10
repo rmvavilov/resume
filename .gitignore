@@ -10,6 +10,9 @@ Homestead.json
 Homestead.yaml
 .env
 
+/public/img/avatar
+!/public/img/avatar/default.jpg
+
 # temp hide main files with personal data
 /resources/views/_main.blade.php
 /public/img/_resume-photo.jpg
