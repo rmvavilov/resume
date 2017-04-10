@@ -106,10 +106,10 @@ class UsersController extends Controller
                     $old_avatar_file_name = $user->avatar;
                     // delete old file
                     if ($old_avatar_file_name != User::DEFAULT_USER_IMAGE) {
-                        File::delete(public_path('/img/avatar/') . $old_avatar_file_name);
+                        File::delete(public_path(User::AVATAR_PATH) . $old_avatar_file_name);
                     }
                     // crete new file
-                    Image::make($avatar_file)->resize(250, 250)->save(public_path('/img/avatar/') . $avatar_file_name);
+                    Image::make($avatar_file)->resize(250, 250)->save(public_path(User::AVATAR_PATH) . $avatar_file_name);
                     $user->avatar = $avatar_file_name;
                     $user->save();
                 }

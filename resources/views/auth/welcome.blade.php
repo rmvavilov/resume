@@ -4,10 +4,10 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h2>Здравствуйте, {{ $first_name }} {{ $last_name }}!</h2>
+        <h2>{{ trans('app.register_email.greeting') }}{{ $first_name }} {{ $last_name }}!</h2>
 
         <div>
-            Вы успешно зарегистрировались на сайте {{ URL::to('/') }}
+            {{ trans('app.register_email.msg') }}{{ URL::to('/') }}
         </div>
 
     </body>

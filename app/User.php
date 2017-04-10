@@ -13,6 +13,7 @@ class User extends Authenticatable
 
     const DEFAULT_USER_IMAGE = 'default.jpg';
     const PHONE_DELIMITER = '-';
+    const AVATAR_PATH = '/img/avatar/';
 
     /**
      * The attributes that are mass assignable.
@@ -76,7 +77,7 @@ class User extends Authenticatable
         $avatar_file_name = $user->avatar;
 
         if ($avatar_file_name != self::DEFAULT_USER_IMAGE) {
-            File::delete(public_path('/img/avatar/') . $avatar_file_name);
+            File::delete(public_path(self::AVATAR_PATH) . $avatar_file_name);
         }
         $user->avatar = User::DEFAULT_USER_IMAGE;
 

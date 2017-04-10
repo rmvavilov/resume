@@ -6,7 +6,7 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Настройки личного кабинета</h3>
+                        <h3 class="panel-title">{{ trans('app.personal_settings') }}</h3>
                     </div>
                     <div class="panel-body">
                         <section class="content">
@@ -32,11 +32,12 @@
                                                         <br>
 
                                                         <div class="btn-group" role="group" aria-label="...">
-                                                            <button type="submit" class="btn btn-primary">Загрузить
-                                                                фото
+                                                            <button type="submit" class="btn btn-primary">
+                                                                {{ trans('app.photo_upload') }}
                                                             </button>
                                                             <a href="{{ route('users.image.delete')}}"
-                                                               class="btn btn-danger" title="Удалить фото">
+                                                               class="btn btn-danger"
+                                                               title="{{ trans('app.photo_delete') }}">
                                                                 <i class="fa fa-close"></i>
                                                             </a>
                                                         </div>
@@ -56,12 +57,11 @@
 
                                                 <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                                                     <label for="last_name"
-                                                           class="col-md-4 control-label">Фамилия</label>
+                                                           class="col-md-4 control-label">{{ trans('app.last_name') }}</label>
 
                                                     <div class="col-md-6">
                                                         <input id="last_name" type="text" class="form-control"
                                                                name="last_name"
-                                                               {{--value="{{ old('last_name', 'Default') }}" required>--}}
                                                                value="{{ old('last_name', Auth::user()->last_name) }}"
                                                                required>
                                                         @if ($errors->has('last_name'))
@@ -73,7 +73,8 @@
                                                 </div>
 
                                                 <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
-                                                    <label for="first_name" class="col-md-4 control-label">Имя</label>
+                                                    <label for="first_name"
+                                                           class="col-md-4 control-label">{{ trans('app.first_name') }}</label>
 
                                                     <div class="col-md-6">
                                                         <input id="first_name" type="text" class="form-control"
@@ -90,8 +91,9 @@
                                                 </div>
 
                                                 <div class="form-group{{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
-                                                    <label for="date_of_birth" class="col-md-4 control-label">Дата
-                                                        рождения</label>
+                                                    <label for="date_of_birth" class="col-md-4 control-label">
+                                                        {{ trans('app.date_of_birth') }}
+                                                    </label>
 
                                                     <div class="col-md-6">
                                                         <input id="date_of_birth" type="date" class="form-control"
@@ -108,14 +110,14 @@
                                                 </div>
 
                                                 <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                                                    <label for="phone" class="col-md-4 control-label">Телефон</label>
-
+                                                    <label for="phone" class="col-md-4 control-label">
+                                                        {{ trans('app.phone') }}
+                                                    </label>
                                                     <div class="col-md-6">
                                                         <input id="phone" type="tel" class="form-control" name="phone"
                                                                pattern="[0-9]{3}-[0-9]{7}" placeholder="***-*******"
                                                                value="{{ old('phone', Auth::user()->phone) }}"
                                                                required>
-
                                                         @if ($errors->has('phone'))
                                                             <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>
@@ -125,8 +127,9 @@
                                                 </div>
 
                                                 <div class="form-group{{ $errors->has('login') ? ' has-error' : '' }}">
-                                                    <label for="login" class="col-md-4 control-label">Логин</label>
-
+                                                    <label for="login" class="col-md-4 control-label">
+                                                        {{ trans('app.login') }}
+                                                    </label>
                                                     <div class="col-md-6">
                                                         <input id="login" type="login" class="form-control" name="login"
                                                                value="{{ old('login', Auth::user()->login) }}" disabled>
@@ -140,8 +143,9 @@
                                                 </div>
 
                                                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                                    <label for="email" class="col-md-4 control-label">E-Mail</label>
-
+                                                    <label for="email" class="col-md-4 control-label">
+                                                        {{ trans('app.email') }}
+                                                    </label>
                                                     <div class="col-md-6">
                                                         <input id="email" type="email" class="form-control" name="email"
                                                                value="{{ old('email', Auth::user()->email) }}" disabled>
@@ -158,26 +162,26 @@
                                                     <input type="hidden" name="img" value="true">
                                                     <div class="col-md-6 col-md-offset-4">
                                                         <button type="submit" class="btn btn-primary">
-                                                            Сохранить
+                                                            {{ trans('app.save') }}
                                                         </button>
                                                         <button type="reset" class="btn btn-default">
-                                                            Отмена
+                                                            {{ trans('app.cancel') }}
                                                         </button>
                                                     </div>
                                                 </div>
                                             </form>
                                             <hr>
                                             <p class="text-muted">
-                                                <strong>Внимание!!! Как только вы удалите свою учетную запись,
-                                                    возврат будет невозможен. Пожалуйста, будьте внимательны.
+                                                <strong>
+                                                    {{ trans('app.account_delete.warning') }}
                                                 </strong>
                                             </p>
-                                            {{--<a href="#" class="btn btn-danger" disabled>Удалить аккаунт</a>--}}
 
                                             {{-- Modal dialog for account delete --}}
                                             <button type="button" class="btn btn-danger" data-toggle="modal"
                                                     {{--data-target=".bs-example-modal-sm">Small modal--}}
-                                                    data-target="#data-delete">Удалить аккаунт
+                                                    data-target="#data-delete">
+                                                {{ trans('app.account_delete.btn') }}
                                             </button>
 
                                             <div id="data-delete" class="modal fade" tabindex="-1" role="dialog"
@@ -188,7 +192,7 @@
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                     aria-label="Close"><span
                                                                         aria-hidden="true">&times;</span></button>
-                                                            <h4 class="modal-title">Удаление аккаунта</h4>
+                                                            <h4 class="modal-title">{{ trans('app.account_delete.modal_title') }}</h4>
                                                         </div>
                                                         <div class="modal-body">
                                                             <form id="delete-form" class="form-horizontal" role="form"
@@ -197,14 +201,12 @@
                                                                 {{ csrf_field() }}
                                                                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                                                     <label for="password"
-                                                                           class="col-md-4 control-label">Пароль</label>
+                                                                           class="col-md-4 control-label">{{ trans('app.password') }}</label>
 
                                                                     <div class="col-md-6">
                                                                         <input id="password" type="password"
                                                                                class="form-control" min="6" max="16"
-                                                                               name="password"
-                                                                               required
-                                                                        >
+                                                                               name="password" required>
 
                                                                         @if ($errors->has('password'))
                                                                             <span class="help-block">
@@ -219,10 +221,12 @@
                                                             <div class="form-group">
                                                                 <div class="btn-group" role="group" aria-label="...">
                                                                     <button type="submit" form="delete-form"
-                                                                            class="btn btn-danger">Подтвердить
+                                                                            class="btn btn-danger">
+                                                                        {{ trans('app.account_delete.confirm') }}
                                                                     </button>
                                                                     <button type="button" data-dismiss="modal"
-                                                                            class="btn btn-default">Отмена
+                                                                            class="btn btn-default">
+                                                                        {{ trans('app.account_delete.cancel') }}
                                                                     </button>
                                                                 </div>
                                                             </div>

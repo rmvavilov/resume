@@ -19,24 +19,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index');
-
 Route::resource('contacts', 'ContactsController', [
     'only' => ['index']
 ]);
-
-
-Route::group(['middleware' => ['web', 'guest']], function () {
-//    Route::resource('settings', 'SettingsController');
-});
 
 Route::group(['middleware' => ['web', 'auth']], function () {
     Route::resource('settings', 'SettingsController');
     Route::get('users', 'UsersController@index')->name('users.index');
     Route::post('users/{id}', 'UsersController@update')->name('users.update');
-    
     Route::post('users/image/update', 'UsersController@updateImage')->name('users.image.update');
     Route::get('users/image/delete', 'UsersController@deleteImage')->name('users.image.delete');
-    
     Route::post('delete', 'UsersController@deleteAccount')->name('delete');
 });
